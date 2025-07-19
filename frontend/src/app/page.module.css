@@ -7,13 +7,24 @@
 }
 
 
-.container a{
+.header a{
   text-decoration: none;
   color: #3e3e3e;
 }
-.container a:hover {
+.header a:hover {
   color: #525252;
 }
+
+
+
+.popupOverlay a{
+  text-decoration: none;
+  color: #3e3e3e;
+}
+.popupOverlay a:hover {
+  color: #525252;
+}
+
 
 .header{
   font-size: 1.2em;
@@ -142,6 +153,10 @@
   margin-bottom: 50px;
 }
 
+.admin_link{
+  color: white;
+}
+
 .about_us img{
   max-width: 400px;
   border-radius: 10px;
@@ -232,10 +247,12 @@
 }
 
 .contact_data{
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  gap: 10px;
 }
 
 
@@ -247,8 +264,8 @@
   padding: 20px 0px;
 }
 
-.contact_title{
-  margin-bottom: 20px;
+.footer p{
+  margin-bottom: 10px;
 }
 
 .contact_data div{
@@ -288,6 +305,7 @@
   .contact_section{
     gap:20px;
   }
+
 
 }
 

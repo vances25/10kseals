@@ -81,9 +81,6 @@ export default function Home() {
         <img src="test.jpg"></img>
        </div>
 
-       
-       <button className={styles.heroBtn} onClick={() => setShowForm(true)}>Contact Us!</button>
-
       <img className={styles.the_line} src="/line.png"></img>
 
      <div id="services" className={styles.our_service}>
@@ -135,7 +132,7 @@ export default function Home() {
 
       </div>
 
-      <button className={styles.heroBtn} onClick={() => setShowForm(true)}>Contact Now!</button>
+      <button className={styles.heroBtn} onClick={() => setShowForm(true)}>Contact Us</button>
       {showForm && (
         <div className={styles.popupOverlay} onClick={() => setShowForm(false)}>
           <div className={styles.popupMenu} onClick={(e) => e.stopPropagation()}>
@@ -156,7 +153,7 @@ export default function Home() {
         <div className={styles.footer}>
           <p>Serving Minneapolis • St. Paul • Twin Cities Area</p><br/>
           <p>© {new Date().getFullYear()}. All Rights Reserved.</p>
-
+          <a className={styles.admin_link} href="/login">Admin Login</a>
         </div>
 
       </div>

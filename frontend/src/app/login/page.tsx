@@ -1,11 +1,41 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+
+
+
+
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+
+
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/refresh`, {
+                method: 'POST',
+                credentials: 'include', // sends cookies!
+            });
+            if (res.ok) {
+                const data = await res.json();
+                // maybe store accessToken in context/state if needed
+                window.location.href = "/admin"; // already logged in
+            }
+            } catch (err) {
+            console.log("Not logged in");
+            }
+        };
+
+        checkSession();
+}, []);
+
+
+
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,15 +45,17 @@ export default function AdminLogin() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        credentials: "include",
+        headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ username, password }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        const data = await res.json();
         setError(data.message || 'Login failed');
       } else {
-        // success logic
+        localStorage.setItem("token", data.access_token)
         window.location.href = '/admin';
       }
     } catch (err) {
