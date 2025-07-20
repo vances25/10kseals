@@ -1,12 +1,20 @@
 "use client";
 
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 export default function Home() {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
   const [showForm, setShowForm] = useState<boolean>(false);
+  const [photos, setPhotos] = useState([]);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/get_photos`)
+      .then(res => res.json())
+      .then(data => setPhotos(data.photos || []))
+      .catch(console.error);
+  }, []);
 
 
 
@@ -57,7 +65,7 @@ export default function Home() {
 
 
         <div className={styles.hero_overlay}>
-          <h1>Revive And Protect Your Driveway With 10,000 SEALS!</h1>
+          <h1>Revive And Protect Your Driveway</h1>
           <p>Proudly serving the Twin Cities – Minneapolis & St. Paul</p>
           <button className={styles.heroBtn} onClick={() => setShowForm(true)}>Get a Free Quote</button>
 
@@ -81,7 +89,47 @@ export default function Home() {
         <img src="test.jpg"></img>
        </div>
 
+
+        <p>OUR CREW</p>
+       <div className={styles.meet_crew}>
+
+        <div>
+          <img src="/person.png"></img>
+          <h3>Vance Schaefer</h3>
+        </div>
+
+        <div>
+          <img src="/person.png"></img>
+          <h3>Vance Schaefer</h3>
+        </div>
+
+          <div>
+          <img src="/person.png"></img>
+          <h3>Vance Schaefer</h3>
+        </div>
+
+
+       </div>
+
       <img className={styles.the_line} src="/line.png"></img>
+
+
+      <div className={styles.galleryPreviewSection}>
+      <h2 className={styles.previewTitle}>See Our Results</h2>
+      <div className={styles.previewGrid}>
+        {photos.slice(0, 3).map((item, idx) => (
+          <div key={idx} className={styles.previewCard}>
+            <img src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/${item.before_file}`} alt="Before" />
+            <img src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/${item.after_file}`} alt="After" />
+          </div>
+        ))}
+      </div>
+      <button className={styles.viewMoreBtn} onClick={() => window.location.href = '/gallery'}>View Full Gallery</button>
+  </div>
+
+  <img className={styles.the_line} src="/line.png"></img>
+
+
 
      <div id="services" className={styles.our_service}>
         <p>OUR SERVICE</p>
@@ -111,16 +159,16 @@ export default function Home() {
     
 
 
-    <p>CONTACTS</p>
+    <p className={styles.dumb_shit}>CONTACTS</p>
     <h1 className={styles.contact_title}>Connect With Us Now!</h1>
-     <div id="contacts" className={styles.contact_section}>
+     <div className={styles.contact_section}>
       <div className={styles.contact_data}>
         <div>
           <img src="/email.png"></img>
           <p>support@10kseals.com</p>
         </div>
 
-        <div>
+        <div id="contacts">
           <img src="/phone.png"></img>
           <p>Main Line: 763-258-7172</p>
         </div>

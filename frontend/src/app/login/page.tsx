@@ -85,6 +85,7 @@ export default function AdminLogin() {
           />
           <button type="submit" className={styles.button}>Login</button>
         </form>
+        <button className={styles.backButton} onClick={() => window.location.href = '/'}>Back to Home</button>
       </div>
     </div>
   );

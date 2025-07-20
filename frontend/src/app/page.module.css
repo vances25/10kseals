@@ -15,7 +15,34 @@
   color: #525252;
 }
 
+.meet_crew{
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 800px;
+  justify-content: center;
+  align-items: center;
 
+}
+
+.meet_crew div{
+  text-align: center;
+  background-color: #f2f6fb;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.meet_crew img{
+  width: 300px;
+  border-radius: 40px;
+}
 
 .popupOverlay a{
   text-decoration: none;
@@ -189,8 +216,9 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  top: -70px;
   gap: 20px;
+  position: relative;
+  top: -70px
 }
 
 
@@ -202,6 +230,7 @@
   gap: 20px;
   flex-wrap: wrap;
   width: 800px;
+
 }
 
 .offered_services div strong {
@@ -246,6 +275,10 @@
   margin-bottom: 100px;
 }
 
+.dumb_shit{
+  margin-top: 40px;
+}
+
 .contact_data{
   margin-top: 30px;
   display: flex;
@@ -278,6 +311,56 @@
 .contact_data img{
   width: 30px;
 }
+
+
+.galleryPreviewSection {
+  padding: 40px 20px;
+  background-color: #f2f6fb;
+  text-align: center;
+  border-radius: 15px;
+  position: relative;
+  top: -70px
+}
+
+.previewTitle {
+  font-size: 1.8rem;
+  color: #0B3D91;
+  margin-bottom: 30px;
+}
+
+.previewGrid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.previewCard {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 300px;
+}
+
+.previewCard img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  object-fit: cover;
+  height: 180px;
+}
+
+.viewMoreBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #0B3D91;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 
 @media(max-width:768px) {
 
@@ -392,8 +475,4 @@
   transition: color 0.3s ease;
   background-color: red;
   border-radius: 10px;
-}
-
-.popupMenu .closeBtn:hover {
-  color: #0B3D91;
 }

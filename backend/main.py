@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Request, Form, Header, Response
+from fastapi import FastAPI, HTTPException, Request, Form, Header, Response, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -11,6 +11,9 @@ from slowapi.errors import RateLimitExceeded
 import bcrypt
 import time
 import jwt
+import uuid
+from fastapi.staticfiles import StaticFiles
+import time
 
 
 
@@ -18,11 +21,17 @@ load_dotenv()
 
 database = None
 
+
+UPLOAD_DIR = "uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+
 #app = FastAPI(docs_url=None, redoc_url=None)
 app = FastAPI()
 
 limiter = Limiter(key_func=get_remote_address)
 
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
@@ -146,6 +155,115 @@ async def login(data: LoginData, request: Request, response: Response):
 
 
     return {"access_token": access_token}
+
+
+@app.post("/upload_pictures")
+async def upload_pictures(
+    request: Request,
+    after: UploadFile = File(...),
+    before: UploadFile = File(...),
+    Authorization: str = Header(...)
+):
+    db = request.app.state.db
+    
+    ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".heic"}
+
+    try:
+        result = decode_token(Authorization.split("Bearer ")[1], os.getenv("ACCESS_KEY"))
+        if not result:
+            raise HTTPException(status_code=403, detail="Unauthorized")
+    except:
+        raise HTTPException(status_code=403, detail="bad format")
+
+    file_id = str(uuid.uuid4()).split("-")[-1]
+
+    # Extract file extensions
+    _, before_ext = os.path.splitext(before.filename)
+    _, after_ext = os.path.splitext(after.filename)
+
+    if before_ext not in ALLOWED_EXTENSIONS or after_ext not in ALLOWED_EXTENSIONS:
+        raise HTTPException(status_code=400, detail="Only JPG, JPEG, PNG, and WEBP files are allowed")
+
+
+    # Set full filenames with extensions
+    before_filename = f"uploads/before_{file_id}{before_ext}"
+    after_filename = f"uploads/after_{file_id}{after_ext}"
+    
+    db["powerwash"]["uploads"].insert_one({
+        "before_file": f"before_{file_id}{before_ext}",
+        "after_file": f"after_{file_id}{after_ext}",
+        "uploaded_at": time.time()
+        })
+
+    # Write before picture
+    with open(before_filename, "wb") as f:
+        f.write(await before.read())
+
+    # Write after picture
+    with open(after_filename, "wb") as f:
+        f.write(await after.read())
+
+    return {"before": before_filename, "after": after_filename}
+    
+    
+@app.get("/get_photos")
+async def get_photos(
+    request: Request,
+    limit: int | None = 10000
+):
+    db = request.app.state.db
+    
+    ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".heic"}
+
+
+    all_photos = await db["powerwash"]["uploads"].find({}, {"_id": 0}).sort("uploaded_at", -1).to_list(length=limit)
+    
+    
+    
+
+    return {"detail": "success", "photos": all_photos}
+
+
+@app.post("/logout")
+async def logout(response: Response):
+    response.delete_cookie(
+        key="refresh_token",
+        path="/",
+    )
+    return {"detail": "Logged out"}
+
+
+@app.delete("/delete_photo")
+async def delete_photo(
+    before: str,
+    after: str,
+    request: Request,
+    Authorization: str = Header(...),
+):
+    db = request.app.state.db
+
+    try:
+        result = decode_token(Authorization.split("Bearer ")[1], os.getenv("ACCESS_KEY"))
+        if not result:
+            raise HTTPException(status_code=403, detail="Unauthorized")
+    except:
+        raise HTTPException(status_code=403, detail="bad format")
+    
+    
+    await db["powerwash"]["uploads"].delete_one({"after_file": after})
+
+    base_path = os.path.join(os.getcwd(), "uploads")  # safer base path
+
+    before_path = os.path.join(base_path, before)
+    after_path = os.path.join(base_path, after)
+
+    for path in [before_path, after_path]:
+        if os.path.exists(path):
+            os.remove(path)
+        else:
+            print(f"File not found: {path}")
+
+    return {"detail": f"succesfully deleted photo pair set with {after}"}
 
 
 @app.post("/refresh")

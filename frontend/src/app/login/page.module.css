@@ -67,3 +67,22 @@
 .button:hover {
   background-color: #2F6AB3;
 }
+
+.backButton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #d9534f;
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95em;
+  cursor: pointer;
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #c9302c;
+}
