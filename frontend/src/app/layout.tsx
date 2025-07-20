@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "10k SEALS",
   description: "Revive And Protect Your Driveway",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
