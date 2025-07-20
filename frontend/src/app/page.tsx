@@ -1,4 +1,11 @@
 "use client";
+"use client";
+
+type PhotoItem = {
+  before_file: string;
+  after_file: string;
+  uploaded_at: number;
+};
 
 import styles from "./page.module.css";
 import { useState, useEffect } from "react";
@@ -7,7 +14,7 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
   const [showForm, setShowForm] = useState<boolean>(false);
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState<PhotoItem[]>([]);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/get_photos`)
