@@ -266,6 +266,39 @@ async def delete_photo(
     return {"detail": f"succesfully deleted photo pair set with {after}"}
 
 
+class ChangePassword(BaseModel):
+    old_password: str
+    new_password: str
+@app.post("/change_password")
+async def change_password(
+    data: ChangePassword,
+    request: Request,
+    Authorization: str = Header(...),
+):
+    db = request.app.state.db
+
+    try:
+        result = decode_token(Authorization.split("Bearer ")[1], os.getenv("ACCESS_KEY"))
+        if not result:
+            raise HTTPException(status_code=403, detail="Unauthorized")
+    except:
+        raise HTTPException(status_code=403, detail="bad format")
+    
+    admin_user = await db["powerwash"]["admin"].find_one({"username": "10kseals_admin"}, {"_id": 0})
+    
+    
+    if not bcrypt.checkpw(data.old_password.encode(), admin_user["password"]):
+        raise HTTPException(status_code=401, detail="incorrect password!")
+    
+    
+    db["powerwash"]["admin"].update_one({"username": "10kseals_admin"}, {"$set": {"password": bcrypt.hashpw(data.new_password.encode(), bcrypt.gensalt())}})
+    
+    return {"detail": "new password set!"}
+    
+    
+    
+    
+
 @app.post("/refresh")
 async def refresh(request: Request, response: Response):
     db = request.app.state.db

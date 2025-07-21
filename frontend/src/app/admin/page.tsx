@@ -14,6 +14,11 @@ export default function AdminDashboard() {
     return "upload";
   });
 
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [showPasswords, setShowPasswords] = useState(false);
+
   const handleLogout = async () => {
     try {
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
@@ -127,6 +132,40 @@ export default function AdminDashboard() {
     }
   };
 
+  const handlePasswordChange = async () => {
+    if (newPassword !== confirmPassword) {
+      alert("New passwords do not match.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/change_password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify({
+          old_password: oldPassword,
+          new_password: newPassword
+        }),
+      });
+
+      if (res.ok) {
+        alert("Password changed successfully.");
+        setOldPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        const error = await res.json();
+        alert("Failed to change password: " + (error.detail || "Unknown error"));
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error changing password.");
+    }
+  };
+
     if(loading){
       return(
       <>
@@ -191,6 +230,50 @@ export default function AdminDashboard() {
                   </div>
                 ))}
               </div>
+            </div>
+          }
+
+          {mode === "password" &&
+            <div className={styles.changePassword}>
+              <h1>Reset Password</h1>
+              <div>
+                <p>Old Password:</p>
+                <input
+                  type={showPasswords ? "text" : "password"}
+                  className={styles.passwordInput}
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                />
+              </div>
+              <div>
+                <p>New Password:</p>
+                <input
+                  type={showPasswords ? "text" : "password"}
+                  className={styles.passwordInput}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+              </div>
+              <div>
+                <p>Confirm New Password:</p>
+                <input
+                  type={showPasswords ? "text" : "password"}
+                  className={styles.passwordInput}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
+              <div style={{ marginTop: "10px" }}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={showPasswords}
+                    onChange={() => setShowPasswords(!showPasswords)}
+                  />{" "}
+                  Show Passwords
+                </label>
+              </div>
+              <button onClick={handlePasswordChange}>Upload</button>
             </div>
           }
 

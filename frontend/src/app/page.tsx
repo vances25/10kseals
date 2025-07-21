@@ -33,9 +33,9 @@ export default function Home() {
           <img src="/logo.png"></img>
           
           <div className={styles.links}>
+            <a href="reviews">HOME</a>
             <a href="#contacts">CONTACT</a>
             <a href="/gallery">GALLERY</a>
-            <a href="reviews">REVIEWS</a>
             <a href="#services">SERVICES</a>
           </div>
 
@@ -56,10 +56,10 @@ export default function Home() {
       {openMenu && (
         <div className={styles.popupOverlay} onClick={() => setOpenMenu(false)}>
           <div className={styles.popupMenu} onClick={(e) => e.stopPropagation()}>
-            <a onClick={() => setOpenMenu(false)} href="#contacts">contact</a>
-            <a onClick={() => setOpenMenu(false)} href="/gallery">gallery</a>
-            <a onClick={() => setOpenMenu(false)} href="/reviews">reviews</a>
-            <a onClick={() => setOpenMenu(false)} href="#services">services</a>
+            <a onClick={() => setOpenMenu(false)} href="/">HOME</a>
+            <a onClick={() => setOpenMenu(false)} href="#contacts">CONTACT</a>
+            <a onClick={() => setOpenMenu(false)} href="/gallery">GALLERY</a>
+            <a onClick={() => setOpenMenu(false)} href="#services">SERVICES</a>
             <button className={styles.closeBtn} onClick={() => setOpenMenu(false)}>Close</button>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function Home() {
       <button className={styles.viewMoreBtn} onClick={() => window.location.href = '/gallery'}>View Full Gallery</button>
   </div>
 
-  <img className={styles.the_line} src="/line.png"></img>
+  <img className={styles.the_line} src="/line2.png"></img>
 
 
 

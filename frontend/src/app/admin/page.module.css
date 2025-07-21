@@ -153,3 +153,65 @@
 .logoutButton:hover {
   background-color: #c62828;
 }
+
+.changePassword {
+  width: 80%;
+  max-width: 500px;
+  background-color: #f2f6fb;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.changePassword h2 {
+  text-align: center;
+  color: #0B3D91;
+  margin-bottom: 12px;
+}
+
+.changePassword label {
+  font-size: 14px;
+  color: #333;
+}
+
+
+.changePassword input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.changePassword input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.showPasswordToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #333;
+  margin-top: -8px;
+}
+
+.changePassword button {
+  padding: 10px 16px;
+  background-color: #0B3D91;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.changePassword button:hover {
+  background-color: #063074;
+}
