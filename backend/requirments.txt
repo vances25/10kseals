@@ -6,3 +6,4 @@ pydantic
 slowapi
 bcrypt
 pyjwt
+python-multipart
