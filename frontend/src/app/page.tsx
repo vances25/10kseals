@@ -24,6 +24,20 @@ export default function Home() {
   }, []);
 
 
+useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add(styles.visible);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  const elements = document.querySelectorAll(`.${styles.scrollFade}`);
+  elements.forEach(el => observer.observe(el));
+
+  return () => observer.disconnect();
+}, []);
 
 
   return (
@@ -71,10 +85,10 @@ export default function Home() {
       <div className={styles.call_to_action}>
 
 
-        <div className={styles.hero_overlay}>
+        <div className={`${styles.hero_overlay} ${styles.fadeInUp}`}>
           <h1>Revive And Protect Your Driveway</h1>
           <p>Proudly serving the Twin Cities – Minneapolis & St. Paul</p>
-          <button className={styles.heroBtn} onClick={() => setShowForm(true)}>Get a Free Quote</button>
+          <button className={styles.heroBtn} onClick={() => window.location.href = "/#contacts"}>Get a Free Quote</button>
 
         </div>
         <img className={styles.wave} src="wave.png"></img>
@@ -82,7 +96,7 @@ export default function Home() {
 
 
 
-      <div className={styles.about_us}>
+      <div className={`${styles.about_us} ${styles.scrollFade}`}>
 
         <div className={styles.about_text}>
           <p>ABOUT US</p>
@@ -98,7 +112,7 @@ export default function Home() {
 
 
         <p>OUR CREW</p>
-       <div className={styles.meet_crew}>
+       <div className={`${styles.meet_crew} ${styles.scrollFade}`}>
 
         <div>
           <img src="/person.png"></img>
@@ -106,11 +120,6 @@ export default function Home() {
         </div>
 
         <div>
-          <img src="/person.png"></img>
-          <h3>Vance Schaefer</h3>
-        </div>
-
-          <div>
           <img src="/person.png"></img>
           <h3>Vance Schaefer</h3>
         </div>
@@ -121,7 +130,7 @@ export default function Home() {
       <img className={styles.the_line} src="/line.png"></img>
 
 
-      <div className={styles.galleryPreviewSection}>
+      <div className={`${styles.galleryPreviewSection} ${styles.scrollFade}`}>
       <h2 className={styles.previewTitle}>See Our Results</h2>
       <div className={styles.previewGrid}>
         {photos.slice(0, 3).map((item, idx) => (
@@ -138,7 +147,7 @@ export default function Home() {
 
 
 
-     <div id="services" className={styles.our_service}>
+     <div id="services" className={`${styles.our_service} ${styles.scrollFade}`}>
         <p>OUR SERVICE</p>
         <h1>Trusted Power Washing</h1>
         <div className={styles.offered_services}>
@@ -168,7 +177,7 @@ export default function Home() {
 
     <p className={styles.dumb_shit}>CONTACTS</p>
     <h1 className={styles.contact_title}>Connect With Us Now!</h1>
-     <div className={styles.contact_section}>
+     <div className={`${styles.contact_section} ${styles.scrollFade}`}>
       <div className={styles.contact_data}>
         <div>
           <img src="/email.png"></img>
@@ -187,7 +196,7 @@ export default function Home() {
 
       </div>
 
-      <button className={styles.heroBtn} onClick={() => setShowForm(true)}>Contact Us</button>
+      <button className={styles.heroBtn} onClick={() => setShowForm(true)}>Send Email Now</button>
       {showForm && (
         <div className={styles.popupOverlay} onClick={() => setShowForm(false)}>
           <div className={styles.popupMenu} onClick={(e) => e.stopPropagation()}>
