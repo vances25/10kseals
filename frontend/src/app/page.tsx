@@ -197,7 +197,10 @@ useEffect(() => {
       </div>
 
       <button className={styles.heroBtn} onClick={() => setShowForm(true)}>Send Email Now</button>
-      {showForm && (
+     </div>
+        
+
+         {showForm && (
         <div className={styles.popupOverlay} onClick={() => setShowForm(false)}>
           <div className={styles.popupMenu} onClick={(e) => e.stopPropagation()}>
             <h2>Send Us a Message</h2>
@@ -210,9 +213,6 @@ useEffect(() => {
           </div>
         </div>
       )}
-     </div>
-        
-
 
         <div className={styles.footer}>
           <p>Serving Minneapolis • St. Paul • Twin Cities Area</p><br/>
