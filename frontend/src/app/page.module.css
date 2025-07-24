@@ -26,6 +26,10 @@
 
 }
 
+.crew_title{
+  margin-top: 60px;
+}
+
 .meet_crew div{
   text-align: center;
   background-color: #f2f6fb;
@@ -33,15 +37,17 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 20px;
 
 }
 
+
 .meet_crew img{
-  width: 300px;
-  border-radius: 40px;
+  height: 250px;
+  width: 200px;
+  border-radius: 20px;
 }
 
 .popupOverlay a{
@@ -185,7 +191,7 @@
 }
 
 .about_us img{
-  max-width: 400px;
+  max-width: 500px;
   border-radius: 10px;
   width: 100%;
   height: auto;
@@ -215,10 +221,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
   gap: 20px;
-  position: relative;
-  top: -70px
 }
 
 
@@ -240,15 +243,16 @@
 }
 
 .offered_services div{
-  height: 300px;
+  height: 320px;
   width: 250px;
-  padding: 20px;
+  padding: 50px;
   border-radius: 10px;
   background-color: #f2f6fb;
   color: #222;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 7px;
   align-items: center;
 }
 
@@ -260,7 +264,7 @@
 
 .offered_services img{
   width: 180px;
-  height: 120px;
+  height: auto;
   border-radius: 10px;
 }
 
@@ -276,7 +280,7 @@
 }
 
 .dumb_shit{
-  margin-top: 40px;
+  margin-top: 0px;
 }
 
 .contact_data{

@@ -100,23 +100,52 @@ useEffect(() => {
 
         <div className={styles.about_text}>
           <p>ABOUT US</p>
-          <h1><span className={styles.brand_color}>10,000 SEALS</span> Will Make Your Home Shinny</h1>
+          <h1><span className={styles.brand_color}>The Shine</span> You Want. The Seal You Need</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum ut mollitia vitae asperiores deleniti autem atque quis esse. Praesentium, molestiae. Iste, in qui? Error molestias odio sequi ipsa delectus fugit!
-            <br/><br/>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi nobis velit magni consectetur fuga ad quae doloremque explicabo amet, iste sit dolorum quaerat impedit et dicta. Sequi cumque suscipit ipsum.
+            At 10K Seals, we’re committed to helping homes and businesses look their best—and stay protected. Founded by a team that values hard work, quality, and results, we specialize in professional powerwashing and sealcoating services designed to extend the life of your surfaces and boost curb appeal.
+            <br/><br/>
+            Whether it's reviving a weather-worn driveway, sealing asphalt for long-term durability, or blasting away grime from siding and walkways, we use proven techniques to get the job done right the first time. We treat every property like it's our own—with care, precision, and pride.
+            <br/><br/>
+            Based in the twin cities MN, we serve residential and commercial clients looking for dependable, no-hassle service they can count on. When you work with 10K Seals, you’re not just getting a clean surface—you’re getting peace of mind.
 
           </p>
         </div>
         <img src="test.jpg"></img>
        </div>
 
+        <div id="services" className={`${styles.our_service} ${styles.scrollFade}`}>
+        <p>OUR SERVICE</p>
+        <h1>Trusted Power Washing</h1>
+        <div className={styles.offered_services}>
+          <div>
+            <img src="/service_power.png"></img>
+            <h1>Power Washing</h1>
+            <p>Blasts away dirt, grime, and stains from driveways, patios, and concrete with high-pressure cleaning.</p>
+            <strong>$75–$100</strong>
+          </div>
 
-        <p>OUR CREW</p>
+          <div>
+            <img src="/seal.png"></img>
+            <h1>Seal Coating</h1>
+            <p>Protects your driveway from water, oil, and sun damage while restoring a clean, dark finish. Helps prevent cracks and keeps it looking new longer.</p>
+            <strong>$250–$300</strong>
+          </div>
+
+
+          
+
+        </div>
+
+     </div>
+
+
+
+        <p className={styles.crew_title}>OUR CREW</p>
        <div className={`${styles.meet_crew} ${styles.scrollFade}`}>
 
         <div>
-          <img src="/person.png"></img>
-          <h3>Vance Schaefer</h3>
+          <img className={styles.jake_pic} src="/jake.png"></img>
+          <h3>Jake Breitbach</h3>
         </div>
 
         <div>
@@ -144,36 +173,7 @@ useEffect(() => {
   </div>
 
   <img className={styles.the_line} src="/line2.png"></img>
-
-
-
-     <div id="services" className={`${styles.our_service} ${styles.scrollFade}`}>
-        <p>OUR SERVICE</p>
-        <h1>Trusted Power Washing</h1>
-        <div className={styles.offered_services}>
-          <div>
-            <img src="/service_power.jpeg"></img>
-            <h1>Power Washing</h1>
-            <p>Blasts away dirt, grime, and stains from driveways, patios, and concrete with high-pressure cleaning.</p>
-            <strong>$75–$100</strong>
-          </div>
-
-          <div>
-            <img src="/seal.jpg"></img>
-            <h1>Seal Coating</h1>
-            <p>Protects your driveway from water, oil, and sun damage while restoring a clean, dark finish. Helps prevent cracks and keeps it looking new longer.</p>
-            <strong>$250–$300</strong>
-          </div>
-
-
-          
-
-        </div>
-
-     </div>
-
-    
-
+  
 
     <p className={styles.dumb_shit}>CONTACTS</p>
     <h1 className={styles.contact_title}>Connect With Us Now!</h1>
