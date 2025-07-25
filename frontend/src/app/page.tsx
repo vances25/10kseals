@@ -148,11 +148,6 @@ useEffect(() => {
           <h3>Jake Breitbach</h3>
         </div>
 
-        <div>
-          <img src="/person.png"></img>
-          <h3>Vance Schaefer</h3>
-        </div>
-
 
        </div>
 
