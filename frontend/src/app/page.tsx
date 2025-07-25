@@ -47,7 +47,7 @@ useEffect(() => {
           <img src="/logo.png"></img>
           
           <div className={styles.links}>
-            <a href="reviews">HOME</a>
+            <a href="/">HOME</a>
             <a href="#contacts">CONTACT</a>
             <a href="/gallery">GALLERY</a>
             <a href="#services">SERVICES</a>
@@ -100,7 +100,7 @@ useEffect(() => {
 
         <div className={styles.about_text}>
           <p>ABOUT US</p>
-          <h1><span className={styles.brand_color}>The Shine</span> You Want. The Seal You Need</h1>
+          <h1><span className={styles.brand_color}>The Shine</span> You Want. The Seal You Need.</h1>
           <p>
             At 10K Seals, we’re committed to helping homes and businesses look their best—and stay protected. Founded by a team that values hard work, quality, and results, we specialize in professional powerwashing and sealcoating services designed to extend the life of your surfaces and boost curb appeal.
             <br/><br/>
